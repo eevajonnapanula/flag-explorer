@@ -3,14 +3,6 @@ query FlagQuery {
     id
     name
     year
-    emoji
-    colors {
-      name
-      r
-      g
-      b
-    }
-    svgBase64
     svgUrl
   }
 }

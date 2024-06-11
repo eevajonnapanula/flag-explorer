@@ -33,11 +33,11 @@ fun MainScreen(
 ) {
     Column(
         modifier =
-            modifier
-                .fillMaxSize()
-                .verticalScroll(
-                    rememberScrollState(),
-                ),
+        modifier
+            .fillMaxSize()
+            .verticalScroll(
+                rememberScrollState(),
+            ),
     ) {
         if (loading) {
             Column(
@@ -50,35 +50,42 @@ fun MainScreen(
                 CircularProgressIndicator()
             }
         } else {
-            flags.map {
-                Row(
-                    modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = MainScreen.verticalPadding)
-                            .clickable { setFlag(it) },
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(MainScreen.verticalSpacing),
-                ) {
-                    AsyncImage(
-                        modifier = Modifier.height(MainScreen.imageHeight),
-                        model =
-                            ImageRequest.Builder(LocalContext.current)
-                                .decoderFactory(SvgDecoder.Factory())
-                                .data(it.svgUrl)
-                                .crossfade(true)
-                                .build(),
-                        contentDescription = null,
-                    )
-                    Text(
-                        text = it.name,
-                        style = MaterialTheme.typography.titleLarge,
-                    )
+            flags.map { flag ->
+                FlagRow(flag = flag) {
+                    setFlag(it)
                 }
-                HorizontalDivider()
             }
         }
     }
+}
+
+@Composable
+fun FlagRow(flag: FlagQuery.AllFlag, setFlag: (FlagQuery.AllFlag) -> Unit) {
+    Row(
+        modifier =
+        Modifier
+            .fillMaxWidth()
+            .padding(vertical = MainScreen.verticalPadding)
+            .clickable { setFlag(flag) },
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(MainScreen.verticalSpacing),
+    ) {
+        AsyncImage(
+            modifier = Modifier.height(MainScreen.imageHeight),
+            model =
+            ImageRequest.Builder(LocalContext.current)
+                .decoderFactory(SvgDecoder.Factory())
+                .data(flag.svgUrl)
+                .crossfade(true)
+                .build(),
+            contentDescription = null,
+        )
+        Text(
+            text = flag.name,
+            style = MaterialTheme.typography.titleLarge,
+        )
+    }
+    HorizontalDivider()
 }
 
 object MainScreen {

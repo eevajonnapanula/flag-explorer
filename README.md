@@ -1,6 +1,6 @@
 # Flag Explorer
 
-This is an example repository for a small project I did for a blog post I was writing. The goal was to explore using GraphQL with Android. The link to the blog post will be added.
+This is an example repository for a small project I did for a blog post I was writing. The goal was to explore using GraphQL with Android. The link to the blog post will be added. Note, that this project was just a demo for a blog post, and is far away from production ready code. 
 
 The API used in this project is [Pride Flag API](https://pride.dev). 
 
